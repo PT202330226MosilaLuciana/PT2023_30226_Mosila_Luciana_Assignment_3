@@ -26,7 +26,7 @@ public class Client {
         this.age = age;
     }
 
-    public int getId() { return id;}
+    public int getID() { return id;}
     public String getName() {return name;}
     public String getAddress() {return address;}
     public int getAge() {return age;}
@@ -43,5 +43,14 @@ public class Client {
         return "Client [id=" + id + ", name=" + name + ", address=" + address + ", email=" + email + ", age=" + age
                 + "]";
     }
+
+
+
+
+
+
+
+
+
 
 }

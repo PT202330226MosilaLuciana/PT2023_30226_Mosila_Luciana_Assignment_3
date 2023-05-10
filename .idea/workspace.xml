@@ -4,18 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3ce8bbb8-d19c-4329-8562-71b4ad01eed5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/businessLogic/ClientBLL.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/businessLogic/ClientValidator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/businessLogic/ProductBLL.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/businessLogic/ValidatorEmail.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dataAccess/AbstractDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dataAccess/ClientDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dataAccess/ProductDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/Product.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/presentation/GUI.java" afterDir="false" />
+    <list default="true" id="3ce8bbb8-d19c-4329-8562-71b4ad01eed5" name="Changes" comment="1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/businessLogic/ClientBLL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/businessLogic/ClientBLL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dataAccess/AbstractDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dataAccess/AbstractDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/presentation/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/presentation/GUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,12 +100,24 @@
       <workItem from="1683661189758" duration="8871000" />
       <workItem from="1683706687372" duration="4060000" />
       <workItem from="1683713754902" duration="2822000" />
-      <workItem from="1683730294991" duration="11196000" />
+      <workItem from="1683730294991" duration="12547000" />
     </task>
+    <task id="LOCAL-00001" summary="1">
+      <created>1683745089092</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1683745089092</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="1" />
+    <option name="LAST_COMMIT_MESSAGE" value="1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

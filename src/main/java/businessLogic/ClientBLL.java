@@ -1,12 +1,7 @@
 package businessLogic;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
-
-import businessLogic.ValidatorEmail;
-import businessLogic.ClientValidator;
-import businessLogic.Validator;
 import dataAccess.ClientDAO;
 import model.Client;
 
@@ -16,6 +11,7 @@ public class ClientBLL {
     private ClientDAO ClientDAO;
 
     public ClientBLL() {
+
         validators = new ArrayList<Validator<Client>>();
         validators.add(new ValidatorEmail());
         validators.add(new ClientValidator());

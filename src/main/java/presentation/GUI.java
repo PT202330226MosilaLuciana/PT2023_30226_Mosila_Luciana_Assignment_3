@@ -143,7 +143,11 @@ import java.awt.event.ActionListener;
         public static void main(String[] args) {
 
             ClientDAO c = new ClientDAO();
-            Client a = c.findById(12);
+            Client b = new Client("Luci","Sadu","luci@17.com",23);
+            Client d  = new Client("Lucian","SaduG","lucian@17.com",27);
+            c.insert(b);
+            c.insert(d);
+            Client a = c.findById(2);
             System.out.println(a);
         }
 

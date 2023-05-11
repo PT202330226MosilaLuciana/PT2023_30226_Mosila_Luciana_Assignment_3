@@ -28,14 +28,40 @@ public class GUI extends JFrame implements ActionListener {
             tabbedPane.addTab("Clients", clientsPanel);
 
             // Create the clients table
-
             String[] clientsColumns = {"ID", "Name", "Address", "Email"};
             Object[][] clientsData = {};
-
             DefaultTableModel clientsModel = new DefaultTableModel(clientsData, clientsColumns);
             clientsTable = new JTable(clientsModel);
             JScrollPane clientsScrollPane = new JScrollPane(clientsTable);
             clientsPanel.add(clientsScrollPane, BorderLayout.CENTER);
+
+            // Create the clients text areas
+            JPanel clientsTextAreaPanel = new JPanel();
+            BoxLayout boxLayout = new BoxLayout(clientsTextAreaPanel, BoxLayout.Y_AXIS);
+            clientsTextAreaPanel.setLayout(boxLayout);
+            JLabel idLabel = new JLabel("ID:");
+            JTextArea idTextArea = new JTextArea();
+            JLabel nameLabel = new JLabel("Name:");
+            JTextArea nameTextArea = new JTextArea();
+            JLabel addressLabel = new JLabel("Address:");
+            JTextArea addressTextArea = new JTextArea();
+            JLabel emailLabel = new JLabel("Email:");
+            JTextArea emailTextArea = new JTextArea();
+
+            clientsTextAreaPanel.add(idLabel);
+            clientsTextAreaPanel.add(idTextArea);
+            clientsTextAreaPanel.add(nameLabel);
+            clientsTextAreaPanel.add(nameTextArea);
+            clientsTextAreaPanel.add(addressLabel);
+            clientsTextAreaPanel.add(addressTextArea);
+            clientsTextAreaPanel.add(emailLabel);
+            clientsTextAreaPanel.add(emailTextArea);
+            clientsTextAreaPanel.add(new JLabel());
+            clientsTextAreaPanel.add(new JLabel());
+
+// Add an empty label to create a new line
+
+            clientsPanel.add(clientsTextAreaPanel, BorderLayout.NORTH);
 
             // Create the clients button panel
             JPanel clientsButtonPanel = new JPanel(new GridLayout(1, 3));

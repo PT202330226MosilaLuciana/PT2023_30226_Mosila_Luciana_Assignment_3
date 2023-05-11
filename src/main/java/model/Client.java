@@ -1,11 +1,11 @@
 package model;
 
 public class Client {
-    private int id;
-    private String name;
-    private String address;
-    private String email;
-    private int age;
+    public int id;
+    public String name;
+    public String address;
+    public String email;
+    public int age;
 
     public Client() {}
 

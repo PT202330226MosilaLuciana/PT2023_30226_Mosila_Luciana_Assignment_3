@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3ce8bbb8-d19c-4329-8562-71b4ad01eed5" name="Changes" comment="3">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dataAccess/AbstractDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dataAccess/AbstractDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/presentation/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/presentation/GUI.java" afterDir="false" />
-    </list>
+    <list default="true" id="3ce8bbb8-d19c-4329-8562-71b4ad01eed5" name="Changes" comment="4" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -108,7 +102,7 @@
       <workItem from="1683977390425" duration="4288000" />
       <workItem from="1683984375024" duration="6733000" />
       <workItem from="1683992300280" duration="1440000" />
-      <workItem from="1684006881079" duration="939000" />
+      <workItem from="1684006881079" duration="1278000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1683745089092</created>
@@ -138,7 +132,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683840342027</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="4">
+      <created>1684008145245</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1684008145245</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -148,7 +149,8 @@
     <MESSAGE value="1" />
     <MESSAGE value="2" />
     <MESSAGE value="3" />
-    <option name="LAST_COMMIT_MESSAGE" value="3" />
+    <MESSAGE value="4" />
+    <option name="LAST_COMMIT_MESSAGE" value="4" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

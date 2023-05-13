@@ -5,6 +5,8 @@ public class Order {
     Product product;
     int quantity;
 
+    public Order(){}
+
     public Order(Client c, Product p, int q) {
         this.client = c;
         this.product = p;

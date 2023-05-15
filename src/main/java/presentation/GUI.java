@@ -15,6 +15,7 @@ public class GUI extends JFrame implements ActionListener {
 
     private JTable clientsTable;
     private JTable productsTable;
+    private JTable ordersTable;
     private ClientDAO clientDAO;
     private ProductDAO productDAO;
     private OrderDAO orderDAO;
@@ -30,16 +31,20 @@ public class GUI extends JFrame implements ActionListener {
     private int quantityProd;
     private int idProd = -1;
     public JTextArea idTextAreaProd;
-    public JTextArea nameTextAreaProd ;
+    public JTextArea nameTextAreaProd;
 
-    public JTextArea priceTextArea ;
+    public JTextArea priceTextArea;
     public JTextArea quantityTextArea;
 
-    public JTextArea idTextArea ;
+    public JTextArea idTextArea;
     public JTextArea nameTextArea;
-    public JTextArea addressTextArea ;
+    public JTextArea addressTextArea;
     public JTextArea emailTextArea;
     public JTextArea ageTextArea;
+    public JTextArea quantityO;
+    public JTextArea idComanda;
+    public JComboBox<String> productComboBox;
+    public JComboBox<String> clientComboBox;
 
     public GUI() {
         // Create the main frame
@@ -47,7 +52,7 @@ public class GUI extends JFrame implements ActionListener {
         setSize(800, 600);
         clientDAO = new ClientDAO();
         productDAO = new ProductDAO();
-        orderDAO =new OrderDAO();
+        orderDAO = new OrderDAO();
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -59,7 +64,7 @@ public class GUI extends JFrame implements ActionListener {
         tabbedPane.addTab("Clients", clientsPanel);
 
         // Create the clients table
-        String[] clientsColumns = {"ID", "Name", "Address", "Email","Age"};
+        String[] clientsColumns = {"ID", "Name", "Address", "Email", "Age"};
         Object[][] clientsData = {};
         DefaultTableModel clientsModel = new DefaultTableModel(clientsData, clientsColumns);
         clientsTable = new JTable(clientsModel);
@@ -68,18 +73,22 @@ public class GUI extends JFrame implements ActionListener {
 
         // Create the clients text areas
         JPanel clientsTextAreaPanel = new JPanel();
-        BoxLayout boxLayout = new BoxLayout(clientsTextAreaPanel, BoxLayout.Y_AXIS);
-        clientsTextAreaPanel.setLayout(boxLayout);
+        GridLayout gridLayout = new GridLayout(7,2);
+        clientsTextAreaPanel.setLayout(gridLayout);
         JLabel idLabel = new JLabel("ID:");
         idTextArea = new JTextArea();
         JLabel nameLabel = new JLabel("Name:");
         nameTextArea = new JTextArea();
+        nameTextArea.setBackground(Color.gray);
+        nameTextArea.setForeground(Color.white);
         JLabel addressLabel = new JLabel("Address:");
         addressTextArea = new JTextArea();
         JLabel emailLabel = new JLabel("Email:");
         emailTextArea = new JTextArea();
-        JLabel ageLable= new JLabel("Age");
-        ageTextArea =new JTextArea();
+        emailTextArea.setBackground(Color.gray);
+        emailTextArea.setForeground(Color.white);
+        JLabel ageLable = new JLabel("Age");
+        ageTextArea = new JTextArea();
 
         clientsTextAreaPanel.add(idLabel);
         clientsTextAreaPanel.add(idTextArea);
@@ -117,7 +126,7 @@ public class GUI extends JFrame implements ActionListener {
 
 
         // Create the products table
-        String[] productsColumns = {"ID", "Name", "Stock", "Price"};
+        String[] productsColumns = {"ID", "Name", "Price", "Stock"};
         Object[][] productsData = {};
         DefaultTableModel productsModel = new DefaultTableModel(productsData, productsColumns);
         productsTable = new JTable(productsModel);
@@ -126,7 +135,7 @@ public class GUI extends JFrame implements ActionListener {
 
         // Create the products text areas
         JPanel productsTextAreaPanel = new JPanel();
-        BoxLayout boxLayoutProd = new BoxLayout(productsTextAreaPanel, BoxLayout.Y_AXIS);
+        GridLayout boxLayoutProd = new GridLayout(10,5);
         productsTextAreaPanel.setLayout(boxLayoutProd);
         JLabel idLabelProd = new JLabel("ID:");
         idTextAreaProd = new JTextArea();
@@ -135,6 +144,7 @@ public class GUI extends JFrame implements ActionListener {
         JLabel priceLabel = new JLabel("Price:");
         priceTextArea = new JTextArea();
         JLabel quantityLabel = new JLabel("Quantity:");
+        JLabel quantityLabel2 = new JLabel("Quantity:");
         quantityTextArea = new JTextArea();
 
         productsTextAreaPanel.add(idLabelProd);
@@ -144,9 +154,9 @@ public class GUI extends JFrame implements ActionListener {
         productsTextAreaPanel.add(priceLabel);
         productsTextAreaPanel.add(priceTextArea);
         productsTextAreaPanel.add(quantityLabel);
+        productsTextAreaPanel.add(quantityLabel2);
         productsTextAreaPanel.add(quantityTextArea);
-        productsTextAreaPanel.add(new JLabel());
-        productsTextAreaPanel.add(new JLabel());
+
 
         productsPanel.add(productsTextAreaPanel, BorderLayout.NORTH);
 
@@ -164,42 +174,91 @@ public class GUI extends JFrame implements ActionListener {
         productsPanel.add(productsButtonPanel, BorderLayout.SOUTH);
 
 
-
-
 /////            // Create the orders tab
+        // Create the orders tab
         JPanel ordersPanel = new JPanel(new BorderLayout());
         tabbedPane.addTab("Orders", ordersPanel);
 
-        // Create the orders panel
+// Create the orders table
+        String[] ordersColumns = {"ID", "Product", "Client", "Quantity"};
+        Object[][] ordersData = {};
+        DefaultTableModel ordersModel = new DefaultTableModel(ordersData, ordersColumns);
+        ordersTable = new JTable(ordersModel);
+        JScrollPane ordersScrollPane = new JScrollPane(ordersTable);
+        ordersPanel.add(ordersScrollPane, BorderLayout.CENTER);
+
+// Create the orders form panel
         JPanel ordersFormPanel = new JPanel(new GridLayout(3, 2));
         JLabel productLabel = new JLabel("Product:");
-        JComboBox<String> productComboBox = new JComboBox<String>(new String[]{"Product 1", "Product 2"});
-        JLabel clientLabel = new JLabel("Client:");
-        // JComboBox<String> clientComboBox = new JComboBox
+        ordersFormPanel.add(productLabel);
 
-        // Create the orders button panel
-        JPanel ordersButtonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        JButton createOrderButton = new JButton("Create Order");
-        createOrderButton.addActionListener(this);
-        ordersButtonPanel.add(createOrderButton);
-        ordersPanel.add(ordersButtonPanel, BorderLayout.SOUTH);
-///////////
-        //DefaultTableModel clientsModel = (DefaultTableModel) clientsTable.getModel();
-
-
+// Create and populate the product combo box
+        productComboBox = new JComboBox<>();
         List<Product> products = productDAO.findAll();
-        List<Client> clients = clientDAO.findAll();
+        for (Product product : products) {
+            productComboBox.addItem(product.getName());
+        }
+        ordersFormPanel.add(productComboBox);
 
-        // Clear the existing data in the table and Populate the table with the new data
+        JLabel clientLabel = new JLabel("Client:");
+        ordersFormPanel.add(clientLabel);
+
+// Create and populate the client combo box
+        clientComboBox = new JComboBox<>();
+        List<Client> clients = clientDAO.findAll();
+        for (Client client : clients) {
+            clientComboBox.addItem(client.getName());
+        }
+        ordersFormPanel.add(clientComboBox);
+
+        JLabel quantityLb = new JLabel("Quantity:");
+        ordersFormPanel.add(quantityLabel);
+        quantityO = new JTextArea();
+        ordersFormPanel.add(quantityO);
+
+
+
+
+
+
+// Create the orders button panel
+        JPanel ordersButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton createOrderButton = new JButton("Create Order");
+        JButton deleteOrderButton = new JButton("Delete Order");
+        createOrderButton.addActionListener(this);
+        deleteOrderButton.addActionListener(this);
+        ordersButtonPanel.add(createOrderButton);
+        ordersButtonPanel.add(deleteOrderButton);
+        JLabel idCom = new JLabel("ID (DELETE):");
+
+        ordersButtonPanel.add(idCom);
+        idComanda = new JTextArea();
+        idComanda.setPreferredSize(new Dimension(40,20));
+        ordersButtonPanel.add(idComanda);
+
+        ordersPanel.add(ordersButtonPanel, BorderLayout.SOUTH);
+
+
+// Clear the existing data in the table and populate the table with the new data
         clientsModel.setRowCount(0);
         for (Client client : clients) {
             clientsModel.addRow(new Object[]{client.getId(), client.getName(), client.getAddress(), client.getEmail(), client.getAge()});
         }
+
         productsModel.setRowCount(0);
-        for(Product product: products){
+        for (Product product : products) {
             productsModel.addRow(new Object[]{product.getId(), product.getName(), product.getPrice(), product.getQuantity()});
         }
+        List<Comanda> comenzi = orderDAO.findAll();
+        ordersModel.setRowCount(0);
+        for (Comanda c : comenzi) {
+            ordersModel.addRow(new Object[]{c.getId(),c.getClient(),
+                    c.getProduct(),
+                    c.getCantitate()});
+        }
 
+// Add the orders form panel to the orders panel
+        ordersPanel.add(ordersFormPanel, BorderLayout.NORTH);
 
 
         add(tabbedPane);
@@ -209,13 +268,13 @@ public class GUI extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         // Handle button clicks
         if (e.getActionCommand().equals("Add Client")) {
-            if(!idTextArea.getText().isEmpty()) {
+            if (!idTextArea.getText().isEmpty()) {
                 idClient = Integer.parseInt(idTextArea.getText());
             }
-            if(!nameTextArea.getText().isEmpty()) {
+            if (!nameTextArea.getText().isEmpty()) {
                 nameClient = nameTextArea.getText();
             }
-            if(!addressTextArea.getText().isEmpty()){
+            if (!addressTextArea.getText().isEmpty()) {
                 try {
                     addressClient = addressTextArea.getText();
                 } catch (NumberFormatException ex) {
@@ -223,7 +282,7 @@ public class GUI extends JFrame implements ActionListener {
                     return;
                 }
             }
-            if(!ageTextArea.getText().isEmpty()){
+            if (!ageTextArea.getText().isEmpty()) {
                 try {
                     ageClient = Integer.parseInt(ageTextArea.getText());
                 } catch (NumberFormatException ex) {
@@ -232,9 +291,9 @@ public class GUI extends JFrame implements ActionListener {
                 }
             }
 
-            if(!emailTextArea.getText().isEmpty()) {
+            if (!emailTextArea.getText().isEmpty()) {
                 try {
-                    emailClient =emailTextArea.getText();
+                    emailClient = emailTextArea.getText();
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(this, "Invalid email");
                     return;
@@ -243,13 +302,12 @@ public class GUI extends JFrame implements ActionListener {
             List<Product> products = productDAO.findAll();
 
 
-            if(idClient==-1) {
+            if (idClient == -1) {
                 // Create a new product object
                 Client client = new Client(nameClient, addressClient, emailClient, ageClient);
                 clientDAO.insert(client);
-            }
-            else{
-                Client client = new Client(idClient,nameClient, addressClient, emailClient, ageClient);
+            } else {
+                Client client = new Client(idClient, nameClient, addressClient, emailClient, ageClient);
                 clientDAO.insert(client);
             }
 
@@ -263,66 +321,42 @@ public class GUI extends JFrame implements ActionListener {
             }
 
             // Handle add client button click
-        } else if (e.getActionCommand().equals("Edit Client")) {
-            // Handle edit client button click
-            if(!idTextArea.getText().isEmpty()) {
+        } else if (e.getActionCommand().equals("Update Client")) {
+
+            if (!idTextArea.getText().isEmpty()) {
                 idClient = Integer.parseInt(idTextArea.getText());
-            }
-            if(!nameTextArea.getText().isEmpty()) {
-                nameClient = nameTextArea.getText();
-            }
-            if(!addressTextArea.getText().isEmpty()){
-                try {
-                    addressClient = addressTextArea.getText();
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(this, "Invalid address");
-                    return;
-                }
-            }
-            if(!ageTextArea.getText().isEmpty()){
-                try {
-                    ageClient = Integer.parseInt(ageTextArea.getText());
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(this, "Invalid age value");
-                    return; // Exit the method to prevent further execution
-                }
+                System.out.println(idClient);
             }
 
-            if(!emailTextArea.getText().isEmpty()) {
-                try {
-                    emailClient =emailTextArea.getText();
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(this, "Invalid email");
-                    return;
-                }
-            }
-            List<Product> products = productDAO.findAll();
+            nameClient = nameTextArea.getText();
+            addressClient = addressTextArea.getText();
 
-
-            if(idClient!=-1){
-                Client client = new Client(idClient,nameClient, addressClient, emailClient, ageClient);
-                clientDAO.update(client);
+            if (!ageTextArea.getText().isEmpty()) {
+                ageClient = Integer.parseInt(ageTextArea.getText());
             }
+            emailClient = emailTextArea.getText();
+
+            // Create a new client object
+            Client client = new Client(idClient, nameClient, addressClient, emailClient, ageClient);
+            clientDAO.update(client);
 
             List<Client> updateClients = clientDAO.findAll();
             DefaultTableModel clientsModel = (DefaultTableModel) clientsTable.getModel();
-            // Clear the existing data in the table
             clientsModel.setRowCount(0);
-            // Populate the table with the new data
+
             for (Client c : updateClients) {
                 clientsModel.addRow(new Object[]{c.getId(), c.getName(), c.getAddress(), c.getEmail(), c.getAge()});
             }
-
         } else if (e.getActionCommand().equals("Delete Client")) {
             // Handle delete client button click
-            if(!idTextArea.getText().isEmpty()) {
+            if (!idTextArea.getText().isEmpty()) {
                 idClient = Integer.parseInt(idTextArea.getText());
             }
 
             List<Product> products = productDAO.findAll();
 
 
-            if(idClient!=-1){
+            if (idClient != -1) {
 
                 clientDAO.delete(idClient);
             }
@@ -336,10 +370,10 @@ public class GUI extends JFrame implements ActionListener {
                 clientsModel.addRow(new Object[]{c.getId(), c.getName(), c.getAddress(), c.getEmail(), c.getAge()});
             }
         } else if (e.getActionCommand().equals("Add Product")) {
-            if(!nameTextAreaProd.getText().isEmpty()) {
+            if (!nameTextAreaProd.getText().isEmpty()) {
                 nameProd = nameTextAreaProd.getText();
             }
-            if(!priceTextArea.getText().isEmpty()){
+            if (!priceTextArea.getText().isEmpty()) {
                 try {
                     priceProd = Integer.parseInt(priceTextArea.getText());
                 } catch (NumberFormatException ex) {
@@ -347,7 +381,7 @@ public class GUI extends JFrame implements ActionListener {
                     return; // Exit the method to prevent further execution
                 }
             }
-            if(!idTextAreaProd.getText().isEmpty()){
+            if (!idTextAreaProd.getText().isEmpty()) {
                 try {
                     idProd = Integer.parseInt(idTextAreaProd.getText());
                 } catch (NumberFormatException ex) {
@@ -357,7 +391,7 @@ public class GUI extends JFrame implements ActionListener {
             }
 
             // Validate and parse the quantity
-            if(!quantityTextArea.getText().isEmpty()) {
+            if (!quantityTextArea.getText().isEmpty()) {
                 try {
                     quantityProd = Integer.parseInt(quantityTextArea.getText());
                 } catch (NumberFormatException ex) {
@@ -367,13 +401,12 @@ public class GUI extends JFrame implements ActionListener {
             }
             List<Product> products = productDAO.findAll();
 
-            if(idProd==-1) {
+            if (idProd == -1) {
                 // Create a new product object
                 Product product = new Product(nameProd, priceProd, quantityProd);
                 productDAO.insert(product);
-            }
-            else{
-                Product product = new Product(idProd,nameProd,priceProd,quantityProd);
+            } else {
+                Product product = new Product(idProd, nameProd, priceProd, quantityProd);
                 productDAO.insert(product);
             }
 
@@ -384,13 +417,11 @@ public class GUI extends JFrame implements ActionListener {
             for (Product p : updatedProducts) {
                 productsModel.addRow(new Object[]{p.getId(), p.getName(), p.getPrice(), p.getQuantity()});
             }
-        }
-
-        else if (e.getActionCommand().equals("Edit Product")) {
-            if(!nameTextAreaProd.getText().isEmpty()) {
+        } else if (e.getActionCommand().equals("Edit Product")) {
+            if (!nameTextAreaProd.getText().isEmpty()) {
                 nameProd = nameTextAreaProd.getText();
             }
-            if(!priceTextArea.getText().isEmpty()){
+            if (!priceTextArea.getText().isEmpty()) {
                 try {
                     priceProd = Integer.parseInt(priceTextArea.getText());
                 } catch (NumberFormatException ex) {
@@ -398,17 +429,10 @@ public class GUI extends JFrame implements ActionListener {
                     return; // Exit the method to prevent further execution
                 }
             }
-            if(!idTextAreaProd.getText().isEmpty()){
-                try {
-                    idProd = Integer.parseInt(idTextAreaProd.getText());
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(this, "Invalid price value");
-                    return; // Exit the method to prevent further execution
-                }
-            }
+
 
             // Validate and parse the quantity
-            if(!quantityTextArea.getText().isEmpty()) {
+            if (!quantityTextArea.getText().isEmpty()) {
                 try {
                     quantityProd = Integer.parseInt(quantityTextArea.getText());
                 } catch (NumberFormatException ex) {
@@ -416,12 +440,17 @@ public class GUI extends JFrame implements ActionListener {
                     return;
                 }
             }
-            List<Product> products = productDAO.findAll();
-
-            if(idProd!=-1){
-                Product product = new Product(idProd,nameProd,priceProd,quantityProd);
-                productDAO.update(product);
+            if (!idTextAreaProd.getText().isEmpty()) {
+                try {
+                    idProd = Integer.parseInt(idTextAreaProd.getText());
+                    Product product = new Product(idProd, nameProd, priceProd, quantityProd);
+                    productDAO.update(product);
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(this, "Invalid price value");
+                    return; // Exit the method to prevent further execution
+                }
             }
+            List<Product> products = productDAO.findAll();
 
             // Update the products table
             List<Product> updatedProducts = productDAO.findAll();
@@ -433,7 +462,7 @@ public class GUI extends JFrame implements ActionListener {
             // Handle edit product button click
         } else if (e.getActionCommand().equals("Delete Product")) {
 
-            if(!idTextAreaProd.getText().isEmpty()){
+            if (!idTextAreaProd.getText().isEmpty()) {
                 try {
                     idProd = Integer.parseInt(idTextAreaProd.getText());
                 } catch (NumberFormatException ex) {
@@ -444,7 +473,7 @@ public class GUI extends JFrame implements ActionListener {
 
             List<Product> products = productDAO.findAll();
 
-            if(idProd!=-1){
+            if (idProd != -1) {
                 productDAO.delete(idProd);
             }
 
@@ -458,27 +487,120 @@ public class GUI extends JFrame implements ActionListener {
             // Handle delete product button click
         } else if (e.getActionCommand().equals("Create Order")) {
             // Handle create order button click
-            ComboBoxModel<Object> productComboBox = null;
-            String product = (String) productComboBox.getSelectedItem();
-            ComboBoxModel<Object> clientComboBox = null;
-            String client = (String) clientComboBox.getSelectedItem();
-            Label quantityTextField = null;
-            int quantity = Integer.parseInt(quantityTextField.getText());
 
-            // Check if there is enough stock for the selected product
-            int selectedProductRow = productsTable.getSelectedRow();
-            int stock = Integer.parseInt((String) productsTable.getValueAt(selectedProductRow, 3));
-            if (quantity > stock) {
-                JOptionPane.showMessageDialog(this, "Not enough stock for selected product");
-            } else {
-                // Decrement the product stock and update the table
-                int newStock = stock - quantity;
-                productsTable.setValueAt(String.valueOf(newStock), selectedProductRow, 3);
+            DefaultTableModel ordersModel = (DefaultTableModel) ordersTable.getModel();
+            // Handle create order button click
+            List<Product> productList = productDAO.findAll();
+            // Retrieve the selected client, product, and quantity
+            String selectedClientName = clientComboBox.getSelectedItem().toString();
+            String selectedProductName = productComboBox.getSelectedItem().toString();
+            int quantity = Integer.parseInt(quantityO.getText());
 
-                // Handle creating the order
+            // Find the selected client object using the selected name
+            Client selectedClient = null;
+            List<Client> c1 = clientDAO.findAll();
+            for (Client client : c1) {
+                if (client.getName().equals(selectedClientName)) {
+                    selectedClient = client;
+                    break;
+                }
             }
+            // Find the selected product object using the selected product ID
+            Product selectedProduct = null;
+            for (Product product : productList) {
+                if (selectedProductName.equals(product.getName())) {
+                    selectedProduct = product;
+                    break;
+                }
+            }
+
+            selectedProduct.setQuantity(selectedProduct.getQuantity() - quantity);
+            productDAO.update(selectedProduct);
+            Comanda order = new Comanda(selectedClient.getName(), selectedProduct.getName(), quantity);
+            orderDAO.insert(order);
+            // Handle the created order as needed (e.g., add it to the table model)
+            List<Comanda> orderList = orderDAO.findAll();
+            ordersModel.setRowCount(0);
+            for (Comanda order1 : orderList) {
+                if (order1 != null) {
+                    Object[] rowData = {
+                            order1.getId(),
+                            order1.getClient(),
+                            order1.getProduct(),
+                            order1.getCantitate(),
+                    };
+                    ordersModel.addRow(rowData);
+                }
+            }
+            List<Product> updatedProducts = productDAO.findAll();
+            DefaultTableModel productsModel = (DefaultTableModel) productsTable.getModel();
+            productsModel.setRowCount(0);
+            for (Product p : updatedProducts) {
+                productsModel.addRow(new Object[]{p.getId(), p.getName(), p.getPrice(), p.getQuantity()});
+            }
+
+            // Clear the input fields
+            clientComboBox.setSelectedIndex(0);
+            productComboBox.setSelectedIndex(0);
+            quantityO.setText("");
+        }
+        else if (e.getActionCommand().equals("Delete Order")) {
+            DefaultTableModel ordersModel = (DefaultTableModel) ordersTable.getModel();
+            // Handle create order button click
+            List<Product> productList = productDAO.findAll();
+            // Retrieve the selected client, product, and quantity
+            int idDel = Integer.parseInt(idComanda.getText());
+
+            // Find the selected client object using the selected name
+            Comanda selectedOrder = null;
+            List<Comanda> o1 = orderDAO.findAll();
+            for (Comanda o : o1) {
+                if (idDel==o.getId()) {
+                    selectedOrder = o;
+                    break;
+                }
+            }
+
+            // Find the selected product object using the selected product ID
+            Product selectedProduct = null;
+            for (Product product : productList) {
+                if (selectedOrder.getProduct().equals(product.getName())) {
+                    selectedProduct = product ;
+
+                    break;
+                }
+            }
+            Product produs = new Product(selectedProduct.getId(),selectedProduct.getName(),selectedProduct.getQuantity()+selectedOrder.getCantitate(), selectedProduct.getPrice());
+            productDAO.update(produs);
+
+            orderDAO.delete(idDel);
+            // Handle the created order as needed (e.g., add it to the table model)
+            List<Comanda> orderList = orderDAO.findAll();
+            ordersModel.setRowCount(0);
+            for (Comanda order1 : orderList) {
+                if (order1 != null) {
+                    Object[] rowData = {
+                            order1.getId(),
+                            order1.getClient(),
+                            order1.getProduct(),
+                            order1.getCantitate(),
+                    };
+                    ordersModel.addRow(rowData);
+                }
+            }
+            List<Product> updatedProducts = productDAO.findAll();
+            DefaultTableModel productsModel = (DefaultTableModel) productsTable.getModel();
+            productsModel.setRowCount(0);
+            for (Product p : updatedProducts) {
+                productsModel.addRow(new Object[]{p.getId(), p.getName(), p.getPrice(), p.getQuantity()});
+            }
+
+            // Clear the input fields
+
+            idComanda.setText("");
         }
     }
+
 
 
     public static void main(String[] args) {

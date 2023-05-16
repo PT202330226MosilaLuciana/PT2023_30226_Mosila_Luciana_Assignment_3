@@ -403,10 +403,10 @@ public class GUI extends JFrame implements ActionListener {
 
             if (idProd == -1) {
                 // Create a new product object
-                Product product = new Product(nameProd, priceProd, quantityProd);
+                Product product = new Product(nameProd, quantityProd, priceProd);
                 productDAO.insert(product);
             } else {
-                Product product = new Product(idProd, nameProd, priceProd, quantityProd);
+                Product product = new Product(idProd, nameProd, quantityProd, priceProd);
                 productDAO.insert(product);
             }
 
@@ -443,7 +443,7 @@ public class GUI extends JFrame implements ActionListener {
             if (!idTextAreaProd.getText().isEmpty()) {
                 try {
                     idProd = Integer.parseInt(idTextAreaProd.getText());
-                    Product product = new Product(idProd, nameProd, priceProd, quantityProd);
+                    Product product = new Product(idProd, nameProd, quantityProd, priceProd);
                     productDAO.update(product);
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(this, "Invalid price value");

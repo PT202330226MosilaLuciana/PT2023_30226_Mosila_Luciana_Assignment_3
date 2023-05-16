@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="3ce8bbb8-d19c-4329-8562-71b4ad01eed5" name="Changes" comment="4">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dataAccess/OrderDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dataAccess/OrderDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Comanda.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/presentation/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/presentation/GUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -24,6 +22,19 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="ec81de99-c51c-4323-acf2-2900dac7e37a" />
+        <option name="url" value="https://github.com/PT202330226MosilaLuciana/PT2023_30226_Mosila_Luciana_Assignment_3.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -110,7 +121,9 @@
       <workItem from="1684006881079" duration="3380000" />
       <workItem from="1684057661570" duration="1090000" />
       <workItem from="1684167798327" duration="16038000" />
-      <workItem from="1684187833489" duration="339000" />
+      <workItem from="1684187833489" duration="2606000" />
+      <workItem from="1684234154159" duration="1751000" />
+      <workItem from="1684236624655" duration="453000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1683745089092</created>
@@ -154,7 +167,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684008209515</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="4">
+      <created>1684188467214</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1684188467214</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
